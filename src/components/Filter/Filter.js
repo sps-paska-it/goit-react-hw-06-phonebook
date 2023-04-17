@@ -1,11 +1,12 @@
 import shortid from 'shortid';
+import { Container, Label, Input } from './Filter.styled';
 
 export const Filter = ({ filter, onHandleChangeFilter }) => {
     const filterId = shortid.generate();
     return (
-        <>
-            <label htmlFor={filterId}>Find contacts by me</label>
-            <input
+        <Container>
+            <Label htmlFor={filterId}>Find contacts by me</Label>
+            <Input
                 id={filterId}
                 type="text"
                 name="filter"
@@ -15,6 +16,6 @@ export const Filter = ({ filter, onHandleChangeFilter }) => {
                 required
                 onChange={onHandleChangeFilter}
             />
-        </>
+        </Container>
     );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
+import { MainTitle, Title } from './App.styled';
 
 export class App extends React.Component {
     state = {
@@ -68,9 +69,9 @@ export class App extends React.Component {
         const visibleContacts = this.getVisibleContacts();
         return (
             <>
-                <h1>Phonebook</h1>
+                <MainTitle>Phonebook</MainTitle>
                 <ContactForm onAddContact={addContact} contacts={contacts} />
-                <h2>Contacts</h2>
+                <Title>Contacts</Title>
                 <Filter
                     filter={filter}
                     onHandleChangeFilter={handleChangeFilter}

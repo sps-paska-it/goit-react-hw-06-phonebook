@@ -1,12 +1,14 @@
+import { Item, Contact } from './ContactsItem.stuled';
+
 export const ContactsItem = ({ id, name, number, deleteContact }) => {
     return (
-        <li id={id}>
-            <p>
+        <Item id={id}>
+            <Contact>
                 {name}:{number}
-            </p>
+            </Contact>
             <button type="button" id={id} onClick={deleteContact}>
                 Delete
             </button>
-        </li>
+        </Item>
     );
 };
