@@ -23,4 +23,14 @@ export const Input = styled.input`
     border: 1px solid #bdbdbd;
     border-radius: 4px;
     margin-bottom: 15px;
+    color: #fe6b53;
+
+    ::placeholder {
+        color: #bdbdbd;
+    }
+
+    :focus {
+        outline: none;
+        border: 1px solid #fe6b53;
+    }
 `;

@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 
 export const Item = styled.li`
-    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
+    :last-of-type {
+        margin-bottom: 0;
+    }
 `;
 
 export const Contact = styled.p`
