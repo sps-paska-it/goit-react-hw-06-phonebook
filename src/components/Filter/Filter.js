@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 import { Container, Label, Input } from './Filter.styled';
 
 export const Filter = ({ filter, onHandleChangeFilter }) => {
@@ -19,4 +20,9 @@ export const Filter = ({ filter, onHandleChangeFilter }) => {
             />
         </Container>
     );
+};
+
+Filter.propTypes = {
+    onHandleChangeFilter: PropTypes.func.isRequired,
+    filter: PropTypes.string.isRequired,
 };

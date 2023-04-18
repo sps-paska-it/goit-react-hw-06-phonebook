@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ContactsItem } from './ContactsItem';
 import { Container, Message } from './Contacts.styled';
 
@@ -26,3 +27,14 @@ export class Contacts extends React.Component {
         );
     }
 }
+
+Contacts.propTypes = {
+    deleteContact: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+};

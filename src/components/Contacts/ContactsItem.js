@@ -1,4 +1,5 @@
 import { Item, Contact } from './ContactsItem.stuled';
+import PropTypes from 'prop-types';
 
 export const ContactsItem = ({ id, name, number, deleteContact }) => {
     return (
@@ -11,4 +12,11 @@ export const ContactsItem = ({ id, name, number, deleteContact }) => {
             </button>
         </Item>
     );
+};
+
+ContactsItem.propTypes = {
+    deleteContact: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
 };

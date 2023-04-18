@@ -1,5 +1,6 @@
 import React from 'react';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 import { Form, Input, Label } from './ContactForm.styled';
 
 export class ContactForm extends React.Component {
@@ -83,3 +84,14 @@ export class ContactForm extends React.Component {
         );
     }
 }
+
+ContactForm.propTypes = {
+    onAddContact: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+};
