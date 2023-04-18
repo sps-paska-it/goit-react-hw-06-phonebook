@@ -7,32 +7,13 @@ export class ContactForm extends React.Component {
     state = {
         name: '',
         number: '',
-        isUnique: undefined,
-    };
-
-    notRepeatName = () => {
-        const { name } = this.state;
-        const { contacts } = this.props;
-        const nameCase = name.toLowerCase();
-        const contact = contacts.find(
-            contact => contact.name.toLowerCase() === nameCase
-        );
-        this.setState({
-            isUnique: contact,
-        });
-        if (contact) {
-            alert(`${name} is already in contacts`);
-        }
     };
 
     handleChange = e => {
         const { name, value } = e.target;
-        this.setState(
-            {
-                [name]: value,
-            },
-            this.notRepeatName
-        );
+        this.setState({
+            [name]: value,
+        });
     };
     handleSubmit = e => {
         e.preventDefault();
@@ -87,11 +68,4 @@ export class ContactForm extends React.Component {
 
 ContactForm.propTypes = {
     onAddContact: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
-        })
-    ).isRequired,
 };

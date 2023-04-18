@@ -3,6 +3,7 @@ import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
 import { MainTitle, Title } from './App.styled';
+import { Message } from 'components/Message';
 
 export class App extends React.Component {
     state = {
@@ -11,9 +12,17 @@ export class App extends React.Component {
     };
 
     addContact = newContact => {
-        this.setState(prevState => ({
-            contacts: [...prevState.contacts, newContact],
-        }));
+        const { contacts } = this.state;
+        const repead = contacts.find(
+            contact => contact.name === newContact.name
+        );
+        if (!repead) {
+            this.setState(prevState => ({
+                contacts: [...prevState.contacts, newContact],
+            }));
+            return;
+        }
+        alert(`${newContact.name} is already in contacts`);
     };
 
     deleteContact = id => {
@@ -49,16 +58,20 @@ export class App extends React.Component {
         return (
             <>
                 <MainTitle>Phonebook</MainTitle>
-                <ContactForm onAddContact={addContact} contacts={contacts} />
+                <ContactForm onAddContact={addContact} />
                 <Title>Contacts</Title>
                 <Filter
                     filter={filter}
                     onHandleChangeFilter={handleChangeFilter}
                 />
-                <Contacts
-                    contacts={visibleContacts}
-                    deleteContact={this.deleteContact}
-                />
+                {contacts.length === 0 ? (
+                    <Message message={"You don't have any contact added"} />
+                ) : (
+                    <Contacts
+                        contacts={visibleContacts}
+                        deleteContact={this.deleteContact}
+                    />
+                )}
             </>
         );
     }
