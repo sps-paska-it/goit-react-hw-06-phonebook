@@ -9,4 +9,5 @@ export const MessageStyle = styled.p`
     border: 2px solid #fe6b8b;
     border-radius: 5px;
     margin: 0 auto 25px auto;
+    user-select: none;
 `;

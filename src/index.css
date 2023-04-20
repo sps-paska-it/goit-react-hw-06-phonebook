@@ -10,6 +10,7 @@ body {
     min-height: 100vh;
     font-style: normal;
     padding: 15px;
+    background-color: #fff4ec;
 }
 
 h1,
@@ -21,6 +22,7 @@ h6,
 p {
     margin-top: 0;
     margin-bottom: 0;
+    user-select: none;
 }
 
 ul,
@@ -43,6 +45,7 @@ button {
 a {
     text-decoration: none;
     color: inherit;
+    user-select: none;
 }
 
 img {

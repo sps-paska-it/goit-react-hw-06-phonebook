@@ -31,7 +31,7 @@ export class ContactForm extends React.Component {
     nameId = shortid.generate();
     numberId = shortid.generate();
     render() {
-        const { name, number, isUnique } = this.state;
+        const { name, number } = this.state;
         return (
             <Form onSubmit={this.handleSubmit}>
                 <Label htmlFor={this.nameId}>Name</Label>
@@ -40,7 +40,7 @@ export class ContactForm extends React.Component {
                     type="text"
                     name="name"
                     value={name}
-                    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                    pattern="^[a-zA-Zа-яіїєґА-ЯІЇЄҐ]+(([' -][a-zA-Zа-яіїєґА-ЯІЇЄҐ ])?[a-zA-Zа-яіїєґА-ЯІЇЄҐ]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     placeholder="Anna Maria"
                     required
@@ -58,9 +58,7 @@ export class ContactForm extends React.Component {
                     required
                     onChange={this.handleChange}
                 />
-                <button type="submit" disabled={isUnique}>
-                    Add contact
-                </button>
+                <button type="submit">Add contact</button>
             </Form>
         );
     }

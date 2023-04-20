@@ -13,6 +13,7 @@ export const Label = styled.label`
     margin-bottom: 5px;
     margin-left: 10px;
     color: #fe6b53;
+    user-select: none;
 `;
 
 export const Input = styled.input`

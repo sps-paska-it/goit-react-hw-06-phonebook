@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
@@ -22,7 +23,16 @@ export class App extends React.Component {
             }));
             return;
         }
-        alert(`${newContact.name} is already in contacts`);
+        toast.warn(`${newContact.name} is already in contacts`, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+        });
     };
 
     deleteContact = id => {
@@ -57,7 +67,7 @@ export class App extends React.Component {
         const visibleContacts = this.getVisibleContacts();
         return (
             <>
-                <MainTitle>Phonebook</MainTitle>
+                <MainTitle>Phone book</MainTitle>
                 <ContactForm onAddContact={addContact} />
                 <Title>Contacts</Title>
                 <Filter
@@ -72,6 +82,7 @@ export class App extends React.Component {
                         deleteContact={this.deleteContact}
                     />
                 )}
+                <ToastContainer />
             </>
         );
     }
