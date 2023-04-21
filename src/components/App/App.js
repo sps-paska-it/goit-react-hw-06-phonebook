@@ -60,6 +60,23 @@ export class App extends React.Component {
         });
     };
 
+    componentDidMount() {
+        const localContacts = JSON.parse(localStorage.getItem('Key_contacts'));
+        console.log(localContacts);
+        if (localContacts) {
+            this.setState(prevState => ({
+                contacts: localContacts,
+            }));
+        }
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem(
+            'Key_contacts',
+            JSON.stringify(this.state.contacts)
+        );
+    }
+
     render() {
         const { filter, contacts } = this.state;
         const addContact = this.addContact;
