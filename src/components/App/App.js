@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
@@ -99,7 +99,7 @@ export class App extends React.Component {
                         deleteContact={this.deleteContact}
                     />
                 )}
-                <ToastContainer />
+                {/* <ToastContainer /> */}
             </>
         );
     }
