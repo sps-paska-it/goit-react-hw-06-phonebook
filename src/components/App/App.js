@@ -12,6 +12,22 @@ export class App extends React.Component {
         contacts: [],
     };
 
+    componentDidMount() {
+        const localContacts = JSON.parse(localStorage.getItem('Key_contacts'));
+        if (localContacts) {
+            this.setState({
+                contacts: localContacts,
+            });
+        }
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem(
+            'Key_contacts',
+            JSON.stringify(this.state.contacts)
+        );
+    }
+
     addContact = newContact => {
         const { contacts } = this.state;
         const repead = contacts.find(
@@ -60,23 +76,6 @@ export class App extends React.Component {
             [name]: value,
         });
     };
-
-    componentDidMount() {
-        const localContacts = JSON.parse(localStorage.getItem('Key_contacts'));
-        console.log(localContacts);
-        if (localContacts) {
-            this.setState(prevState => ({
-                contacts: localContacts,
-            }));
-        }
-    }
-
-    componentDidUpdate() {
-        localStorage.setItem(
-            'Key_contacts',
-            JSON.stringify(this.state.contacts)
-        );
-    }
 
     render() {
         const { filter, contacts } = this.state;
