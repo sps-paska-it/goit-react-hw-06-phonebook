@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 // import { ToastContainer, toast } from 'react-toastify';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
@@ -6,101 +6,79 @@ import { Filter } from 'components/Filter';
 import { MainTitle, Title } from './App.styled';
 import { Message } from 'components/Message';
 
-export class App extends React.Component {
-    state = {
-        filter: '',
-        contacts: [],
-    };
+export const App = () => {
+    const [filterContacts, setFilterContacts] = useState('');
+    const [contacts, setContacts] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
         const localContacts = JSON.parse(localStorage.getItem('Key_contacts'));
-        if (localContacts) {
-            this.setState({
-                contacts: localContacts,
-            });
+
+        if (!localContacts || !localContacts.length) {
+            return;
         }
-    }
+        setContacts(localContacts);
+    }, []);
 
-    componentDidUpdate() {
-        localStorage.setItem(
-            'Key_contacts',
-            JSON.stringify(this.state.contacts)
-        );
-    }
+    useEffect(() => {
+        localStorage.setItem('Key_contacts', JSON.stringify(contacts));
+    }, [contacts]);
 
-    addContact = newContact => {
-        const { contacts } = this.state;
+    const addContact = newContact => {
         const repead = contacts.find(
             contact => contact.name === newContact.name
         );
-        if (!repead) {
-            this.setState(prevState => ({
-                contacts: [...prevState.contacts, newContact],
-            }));
+        if (repead) {
+            alert(`${newContact.name} is already in contacts`);
+            // toast.warn(`${newContact.name} is already in contacts`, {
+            //     position: 'top-right',
+            //     autoClose: 5000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: 'light',
+            // });
             return;
         }
-        alert(`${newContact.name} is already in contacts`);
-        // toast.warn(`${newContact.name} is already in contacts`, {
-        //     position: 'top-right',
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: 'light',
-        // });
+        setContacts([...contacts, newContact]);
     };
 
-    deleteContact = id => {
-        this.setState(prevState => {
-            return {
-                contacts: prevState.contacts.filter(
-                    contact => contact.id !== id
-                ),
-            };
-        });
+    const deleteContact = id => {
+        setContacts(prevState =>
+            prevState.filter(contact => contact.id !== id)
+        );
     };
 
-    getVisibleContacts = () => {
-        const { filter, contacts } = this.state;
-        const normalizedFilter = filter.toLowerCase();
+    const getVisibleContacts = () => {
+        const normalizedFilter = filterContacts.toLowerCase();
         return contacts.filter(contact =>
             contact.name.toLowerCase().includes(normalizedFilter)
         );
     };
 
-    handleChangeFilter = e => {
-        const { name, value } = e.target;
-        this.setState({
-            [name]: value,
-        });
+    const handleChangeFilter = e => {
+        setFilterContacts(e.target.value);
     };
 
-    render() {
-        const { filter, contacts } = this.state;
-        const addContact = this.addContact;
-        const handleChangeFilter = this.handleChangeFilter;
-        const visibleContacts = this.getVisibleContacts();
-        return (
-            <>
-                <MainTitle>Phone book</MainTitle>
-                <ContactForm onAddContact={addContact} />
-                <Title>Contacts</Title>
-                <Filter
-                    filter={filter}
-                    onHandleChangeFilter={handleChangeFilter}
+    return (
+        <>
+            <MainTitle>Phone book</MainTitle>
+            <ContactForm onAddContact={addContact} />
+            <Title>Contacts</Title>
+            <Filter
+                filter={filterContacts}
+                onHandleChangeFilter={handleChangeFilter}
+            />
+            {contacts.length === 0 ? (
+                <Message message={"You don't have any contact added"} />
+            ) : (
+                <Contacts
+                    contacts={getVisibleContacts()}
+                    deleteContact={deleteContact}
                 />
-                {contacts.length === 0 ? (
-                    <Message message={"You don't have any contact added"} />
-                ) : (
-                    <Contacts
-                        contacts={visibleContacts}
-                        deleteContact={this.deleteContact}
-                    />
-                )}
-                {/* <ToastContainer /> */}
-            </>
-        );
-    }
-}
+            )}
+            {/* <ToastContainer /> */}
+        </>
+    );
+};
