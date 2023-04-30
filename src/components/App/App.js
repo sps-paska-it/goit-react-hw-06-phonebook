@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
@@ -8,16 +7,9 @@ import { Message } from 'components/Message';
 
 export const App = () => {
     const [filterContacts, setFilterContacts] = useState('');
-    const [contacts, setContacts] = useState([]);
-
-    useEffect(() => {
-        const localContacts = JSON.parse(localStorage.getItem('Key_contacts'));
-
-        if (!localContacts || !localContacts.length) {
-            return;
-        }
-        setContacts(localContacts);
-    }, []);
+    const [contacts, setContacts] = useState(() => {
+        return JSON.parse(localStorage.getItem('Key_contacts')) && [];
+    });
 
     useEffect(() => {
         localStorage.setItem('Key_contacts', JSON.stringify(contacts));
@@ -28,11 +20,10 @@ export const App = () => {
             contact => contact.name === newContact.name
         );
         if (repead) {
-            // alert(`${newContact.name} is already in contacts`);
-            toast.warn('is already in contacts');
+            alert(`${newContact.name} is already in contacts`);
             return;
         }
-        setContacts([...contacts, newContact]);
+        setContacts(prevState => [...prevState, newContact]);
     };
 
     const deleteContact = id => {
@@ -69,7 +60,6 @@ export const App = () => {
                     deleteContact={deleteContact}
                 />
             )}
-            <ToastContainer autoClose={3000} />
         </>
     );
 };
