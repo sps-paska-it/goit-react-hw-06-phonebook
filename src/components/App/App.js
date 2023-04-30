@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
@@ -28,17 +28,8 @@ export const App = () => {
             contact => contact.name === newContact.name
         );
         if (repead) {
-            alert(`${newContact.name} is already in contacts`);
-            // toast.warn(`${newContact.name} is already in contacts`, {
-            //     position: 'top-right',
-            //     autoClose: 5000,
-            //     hideProgressBar: false,
-            //     closeOnClick: true,
-            //     pauseOnHover: true,
-            //     draggable: true,
-            //     progress: undefined,
-            //     theme: 'light',
-            // });
+            // alert(`${newContact.name} is already in contacts`);
+            toast.warn('is already in contacts');
             return;
         }
         setContacts([...contacts, newContact]);
@@ -78,7 +69,7 @@ export const App = () => {
                     deleteContact={deleteContact}
                 />
             )}
-            {/* <ToastContainer /> */}
+            <ToastContainer autoClose={3000} />
         </>
     );
 };
