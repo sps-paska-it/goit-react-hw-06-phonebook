@@ -8,7 +8,7 @@ import { Message } from 'components/Message';
 export const App = () => {
     const [filterContacts, setFilterContacts] = useState('');
     const [contacts, setContacts] = useState(() => {
-        return JSON.parse(localStorage.getItem('Key_contacts')) && [];
+        return JSON.parse(localStorage.getItem('Key_contacts')) || [];
     });
 
     useEffect(() => {
@@ -39,6 +39,8 @@ export const App = () => {
         );
     };
 
+    const isFilterContacts = getVisibleContacts().length;
+
     const handleChangeFilter = e => {
         setFilterContacts(e.target.value);
     };
@@ -54,11 +56,13 @@ export const App = () => {
             />
             {contacts.length === 0 ? (
                 <Message message={"You don't have any contact added"} />
-            ) : (
+            ) : isFilterContacts ? (
                 <Contacts
                     contacts={getVisibleContacts()}
                     deleteContact={deleteContact}
                 />
+            ) : (
+                <Message message={'No contacts found'} />
             )}
         </>
     );

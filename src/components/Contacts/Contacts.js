@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ContactsItem } from './ContactsItem';
 import { Container } from './Contacts.styled';
-import { Message } from 'components/Message';
 
 export const Contacts = ({ contacts, deleteContact }) => {
-    return contacts.length === 0 ? (
-        <Message message={'There are no contacts with this name'} />
-    ) : (
+    return (
         <Container>
             {contacts.map(contact => {
                 return (
