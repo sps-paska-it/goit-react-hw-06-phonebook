@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { MessageStyle } from './Message.styled';
+// import { MessageStyle } from './Message.styled';
 
 export const Message = ({ message }) => {
-    return <MessageStyle>{message}</MessageStyle>;
+    return <b>{message}</b>;
 };
 
 Message.propTypes = {
