@@ -5,13 +5,7 @@ import storage from 'redux-persist/lib/storage';
 const contactsSlice = createSlice({
     name: 'contacts',
     initialState: {
-        localContacts: [
-            { id: 0, name: 'Pasha', number: '0636750602' },
-            { id: 1, name: 'Olia', number: '0636750603' },
-            { id: 2, name: 'Busia', number: '0636750604' },
-            { id: 3, name: 'Tania', number: '0636750605' },
-            { id: 4, name: 'Ksiusha', number: '0636750605' },
-        ],
+        localContacts: [{ id: 0, name: 'Довідкова служба', number: '101' }],
     },
     reducers: {
         addContacts(state, action) {
