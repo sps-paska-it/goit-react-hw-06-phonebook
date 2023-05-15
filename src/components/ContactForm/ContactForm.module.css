@@ -1,14 +1,35 @@
 .form {
-    display: flex;
-    gap: 4px;
+    padding: 15px;
+    width: 500px;
+    border: 2px solid #fe6b53;
+    border-radius: 5px;
+    margin: 0 auto 25px auto;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    color: #fe6b53;
+    user-select: none;
 }
 
 .field {
-    flex-grow: 1;
-    padding: 8px;
-    font: inherit;
-}
+    display: block;
+    height: 25px;
+    width: 70%;
+    padding: 2px 5px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    color: #fe6b53;
 
-.field:focus {
-    outline-color: #1976d2;
+    ::placeholder {
+        color: #bdbdbd;
+    }
+
+    :focus {
+        outline: none;
+        border: 1px solid #fe6b53;
+    }
 }

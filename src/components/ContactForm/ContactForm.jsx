@@ -4,6 +4,7 @@ import { addContacts } from '../../redux/contactsSlise';
 
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
+import { toast } from 'react-toastify';
 
 import { Button } from 'components/Button/Button';
 
@@ -16,7 +17,8 @@ export const ContactForm = () => {
         const name = form.elements.name.value.trim();
         const repead = contacts.find(contact => contact.name === name);
         if (repead) {
-            alert(`${name} is already in contacts`);
+            // alert(`${name} is already in contacts`);
+            toast(`${name} is already in contacts`);
             return;
         }
         const number = form.elements.number.value.trim();
@@ -31,8 +33,11 @@ export const ContactForm = () => {
 
     return (
         <form className={css.form} onSubmit={handleSubmit}>
-            <label htmlFor={nameId}>Name</label>
+            <label className={css.label} htmlFor={nameId}>
+                Name
+            </label>
             <input
+                className={css.field}
                 id={nameId}
                 type="text"
                 name="name"
@@ -42,8 +47,11 @@ export const ContactForm = () => {
                 autoComplete="off"
                 required
             />
-            <label htmlFor={numberId}>Number</label>
+            <label className={css.label} htmlFor={numberId}>
+                Number
+            </label>
             <input
+                className={css.field}
                 id={numberId}
                 type="tel"
                 name="number"

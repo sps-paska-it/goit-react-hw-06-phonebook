@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 12px;
     padding: 8px 0;
@@ -7,6 +8,8 @@
 
 .text {
     flex-grow: 1;
+    color: #900000;
+    max-width: 200px;
 }
 
 .btn {
@@ -19,7 +22,7 @@
     margin: 0;
     border: none;
     border-radius: 4px;
-    background-color: transparent;
+    background: #f19e98;
     cursor: pointer;
     color: #f44336;
 }
