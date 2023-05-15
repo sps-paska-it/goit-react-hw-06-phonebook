@@ -9,10 +9,14 @@ const contactsSlice = createSlice({
     },
     reducers: {
         addContacts(state, action) {
-            state.contacts.push(action.payload);
+            state.localContacts.push(action.payload);
         },
         deleteContacts(state, action) {
-            return state.contacts.filter(task => task.id !== action.payload);
+            return {
+                localContacts: state.localContacts.filter(
+                    contact => contact.id !== action.payload
+                ),
+            };
         },
     },
 });
@@ -20,8 +24,7 @@ const contactsSlice = createSlice({
 const persistConfig = {
     key: 'contacts',
     storage,
-    whitelist: ['contacts'],
-    // version: 1,
+    whitelist: ['localContacts'],
 };
 
 export const contactsLocalReducer = persistReducer(
